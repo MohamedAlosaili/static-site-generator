@@ -1,7 +1,7 @@
 import unittest
 
-from textnode import TextNode
-
+from textnode import TextNode, text_node_to_html_node
+from htmlnode import LeafNode
 
 class TestTextNode(unittest.TestCase):
     def test_eq_text_and_text_type(self):
@@ -44,6 +44,12 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", "bold", "https://github.com")
         self.assertEqual(repr(node), "TextNode(This is a text node, bold, https://github.com)")
         print("Test -> text node representing - passed ✅")
+
+    def test_text_node_to_html_node(self):
+        text_node = TextNode("Hello World", "text")
+        leaf_node = LeafNode(None, "Hello World")
+        self.assertEqual(text_node_to_html_node(text_node).to_html(), leaf_node.to_html())
+        print("Test -> text_node_to_html_node with text type - passed ✅")
 
 
 if __name__ == "__main__":
