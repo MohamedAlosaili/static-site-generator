@@ -3,7 +3,7 @@ import unittest
 from textnode import TextNode, TextType
 from inline_markdown import split_nodes_delimiter, extract_markdown_image, extract_markdown_link, split_nodes_image, split_nodes_link, text_to_textnodes
 
-class TestTextNode(unittest.TestCase):
+class TestInlineMarkdown(unittest.TestCase):
     def test_split_nodes_delimiter_with_one_block(self):
         node = TextNode("This is text with a `code block` word", TextType.TEXT)
         new_nodes = split_nodes_delimiter([node], "`", TextType.CODE)

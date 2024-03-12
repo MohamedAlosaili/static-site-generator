@@ -4,8 +4,8 @@ from htmlnode import HTMLNode, ParentNode, LeafNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_repr(self):
-        html_node = HTMLNode("h1", "Hello World", None, {"class": "text-2xl font-bold text-center", "id": "hello-world-header"})
-        self.assertEqual(repr(html_node), "<h1 class=\"text-2xl font-bold text-center\" id=\"hello-world-header\">Hello World</h1>")
+        html_node = HTMLNode("h1", "Hello World", None, { "class": "text-2xl font-bold text-center", "id": "hello-world-header" })
+        self.assertEqual(repr(html_node), "HTMLNode(h1, Hello World, None, {'class': 'text-2xl font-bold text-center', 'id': 'hello-world-header'})")
         print("Test -> HTMLNode repr - passed ✅")
     
     def test_props_to_html(self):

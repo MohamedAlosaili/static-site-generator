@@ -30,9 +30,7 @@ class HTMLNode:
         return attr
     
     def __repr__(self):
-        if self.tag is None:
-            return f"{self.value}"
-        return f"<{self.tag}{self.props_to_html()}>{self.value or ""}{self.children or ""}</{self.tag}>"
+        return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
     
 
 class LeafNode(HTMLNode):
