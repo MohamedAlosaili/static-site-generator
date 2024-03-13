@@ -41,8 +41,8 @@ class LeafNode(HTMLNode):
         self.props = props
 
     def to_html(self):
-        if self.tag == "img":
-            return f"<{self.tag}{self.props_to_html()} />"
+        # if self.tag == "img":
+        #     return f"<{self.tag}{self.props_to_html()} />"
 
         if self.value == None:
             print("ERROR", self)
