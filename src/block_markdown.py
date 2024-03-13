@@ -36,11 +36,9 @@ def markdown_to_html_node(markdown):
 def markdown_to_blocks(markdown):
     blocks = markdown.split("\n\n")
     text_blocks = []
-    # print("BLOCKs", blocks)
     for block in blocks:
         if block.strip() == "":
             continue
-        print("\nBLOCK", block)
         text_blocks.append(block)
 
     return text_blocks
@@ -51,7 +49,6 @@ def block_to_block_type(block):
     unordered_list_regex = re.compile(r"^(-|\*) .+", re.MULTILINE)
     ordered_list_regex = re.compile(r"^\d\. \w+", re.MULTILINE)
 
-    print("BLOCK", block)
     if re.match(heading_regex, block):
         return BlockType.HEADING
     elif block.startswith("```") and block.endswith("```"):

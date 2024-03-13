@@ -2,6 +2,17 @@ import re, os, shutil
 
 from block_markdown import markdown_to_html_node
 
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    dir_content = os.listdir(dir_path_content)
+    for item in dir_content:
+        current_path = os.path.join(dir_path_content, item)
+        dest_path = os.path.join(dest_dir_path, item)
+        if os.path.isfile(current_path):
+            generate_page(current_path, template_path, dest_path.replace("md", "html"))
+            continue
+
+        generate_pages_recursive(current_path, template_path, dest_path)    
+
 def extract_title(markdown):
     print(markdown.split("\n"))
     title_regex = re.compile(r"^# .+$", re.M)
@@ -26,9 +37,9 @@ def generate_page(from_path, template_path, dest_path):
     title = extract_title(markdown)
     page_content = template.replace("{{ Title }}", title).replace("{{ Content }}", html)
 
-    mode = "x"
-    if not os.path.exists(os.path.exists(dest_path)):
-        mode = "x"
-    dest_file = open(dest_path, mode)
+    if not os.path.exists(dest_path):
+        os.makedirs(os.path.dirname(dest_path), 511, True)
+        
+    dest_file = open(dest_path, "x")
     dest_file.write(page_content)
     dest_file.close()
