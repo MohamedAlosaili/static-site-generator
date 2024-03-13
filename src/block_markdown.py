@@ -17,6 +17,7 @@ def markdown_to_html_node(markdown):
     nodes = []
     for block in blocks:
         block_type = block_to_block_type(block)
+        print("\nBLOCK TYPE", block_type)
         if block_type == BlockType.HEADING:
             nodes.append(to_heading(block))
         elif block_type == BlockType.CODE:
@@ -34,24 +35,26 @@ def markdown_to_html_node(markdown):
 
 def markdown_to_blocks(markdown):
     blocks = markdown.split("\n\n")
-    print("BLOCKS", blocks)
     text_blocks = []
+    # print("BLOCKs", blocks)
     for block in blocks:
-        if block.strip(" ") != "":
-            text_blocks.append(block)
+        if block.strip() == "":
+            continue
+        print("\nBLOCK", block)
+        text_blocks.append(block)
 
     return text_blocks
 
 def block_to_block_type(block):
     heading_regex = r"^#{1,6} \w+"
-    code_regex = r"^```.+```$"
-    quote_regex = re.compile(r"^> \w+", re.MULTILINE)
-    unordered_list_regex = re.compile(r"^(-|\*) \w+", re.MULTILINE)
+    quote_regex = re.compile(r"^> .+", re.MULTILINE)
+    unordered_list_regex = re.compile(r"^(-|\*) .+", re.MULTILINE)
     ordered_list_regex = re.compile(r"^\d\. \w+", re.MULTILINE)
 
+    print("BLOCK", block)
     if re.match(heading_regex, block):
         return BlockType.HEADING
-    elif re.match(code_regex, block):
+    elif block.startswith("```") and block.endswith("```"):
         return BlockType.CODE
     elif re.match(quote_regex, block):
         return BlockType.QUOTE
